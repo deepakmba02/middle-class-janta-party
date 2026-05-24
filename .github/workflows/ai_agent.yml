@@ -4,9 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       user_rant:
-        description: 'The raw text entry from the Tally Form'
+        description: 'The user complaint text'
         required: true
-        default: 'Basic inflation updates.'
+      location:
+        description: 'Where it happened'
+        required: true
+      category:
+        description: 'Category of the burden'
+        required: true
 
 jobs:
   update-ledger:
