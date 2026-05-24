@@ -1,14 +1,12 @@
 import os
-import re
+import sys
 from google import genai
 
-# 1. Initialize the Gemini AI Client using the cloud environment key
-# The new google-genai SDK automatically initializes via the GEMINI_API_KEY env variable.
 client = genai.Client()
 
 def generate_satirical_row(user_submission):
     """
-    AI Agent that reviews citizen complaints and structures them into a clean HTML table row.
+    AI Agent that reviews live citizen complaints and structures them into a clean HTML table row.
     """
     prompt = f"""
     You are the automated chief creative satirist for the Middle Class Janta Party website.
@@ -31,23 +29,16 @@ def generate_satirical_row(user_submission):
     return response.text.strip()
 
 def update_website(new_html_row):
-    """
-    Locates the structural marker in index.html and injects the AI row at the top of the ledger.
-    """
     file_path = "index.html"
     
-    # Read the current layout file
     with open(file_path, "r", encoding="utf-8") as f:
         html_content = f.read()
         
-    # Look for our special HTML identifier tag
     target_tag = '<tbody id="ledger-body">'
     
     if target_tag in html_content:
-        # Inject the fresh automated row immediately below the table body start
         updated_content = html_content.replace(target_tag, f"{target_tag}\n                    {new_html_row}")
         
-        # Overwrite the file on GitHub
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(updated_content)
         print("Successfully updated the MCJP live ledger with new AI content!")
@@ -55,9 +46,13 @@ def update_website(new_html_row):
         print("Error: Could not locate <tbody id='ledger-body'> marker in index.html")
 
 if __name__ == "__main__":
-    # Test sample simulating an anonymous form entry from Bangalore
-    sample_input = "Paid 42,000 rupees rent for a 1BHK in Outer Ring Road plus 18 percent GST on my onboarding platform fee."
-    
-    # Run the automation loop
-    html_row = generate_satirical_row(sample_input)
+    # 💥 DYNAMIC UPDATE: Read the input text sent over by Make.com via the workflow argument
+    # If no argument is found, it falls back to a default testing value.
+    if len(sys.argv) > 1:
+        live_submission = sys.argv[1]
+    else:
+        live_submission = "Paid premium price for basic city amenities again."
+        
+    print(f"Processing Live Submission: {live_submission}")
+    html_row = generate_satirical_row(live_submission)
     update_website(html_row)
