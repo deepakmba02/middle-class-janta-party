@@ -48,3 +48,11 @@ jobs:
         git add index.html
         git diff-index --quiet HEAD || git commit -m "chore: live submission ledger update"
         git push
+
+        - name: Run AI Agent Script
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python generate_tweet.py- name: Run AI Agent Script
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python generate_tweet.py
