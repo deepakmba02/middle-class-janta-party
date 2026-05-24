@@ -1,15 +1,18 @@
 name: Run MCJP AI Agent Ledger Updates
 
 on:
-  workflow_dispatch: # Allows you to trigger the AI agent manually with a single click
-  schedule:
-    - cron: '0 0 * * *' # Automatically runs every night at midnight to process new inputs
+  workflow_dispatch:
+    inputs:
+      user_rant:
+        description: 'The raw text entry from the Tally Form'
+        required: true
+        default: 'Basic inflation updates.'
 
 jobs:
   update-ledger:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Crucial: Gives the AI script permission to commit updates directly back to GitHub
+      contents: write
 
     steps:
     - name: Checkout Repository Code
@@ -25,16 +28,16 @@ jobs:
         python -m pip install --upgrade pip
         pip install google-genai
 
-    - name: Execute AI Agent Script
+    - name: Execute AI Agent Script with Live Data
       env:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      run: python update_ledger.py
+      # Passes the input from Make directly into your python command line arguments
+      run: python update_ledger.py "${{ github.event.inputs.user_rant }}"
 
     - name: Commit & Deploy Live Updates to Netlify
       run: |
         git config --global user.name "MCJP AI Agent"
         git config --global user.email "agent@middleclassjantaparty.org"
         git add index.html
-        # Only commit if changes were actually made by the script
-        git diff-index --quiet HEAD || git commit -m "chore: automated AI update to live ledger index"
+        git diff-index --quiet HEAD || git commit -m "chore: live submission ledger update"
         git push
