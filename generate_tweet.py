@@ -9,7 +9,7 @@ from PIL import Image
 # 1. Initialize Gemini
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel('gemini-pro')
+model = genai.GenerativeModel('gemini-2.5-flash')
 
 def fetch_latest_bangalore_news():
     """Scrapes Google News RSS feed for live Bengaluru middle-class pain points"""
