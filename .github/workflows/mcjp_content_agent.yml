@@ -1,0 +1,35 @@
+name: MCJP Daily Twitter Content Agent
+
+on:
+  schedule:
+    - cron: '30 3 * * *' # Runs automatically every single day at 9:00 AM IST (3:30 AM UTC)
+  workflow_dispatch: # Gives you a separate "Run workflow" button with NO mandatory text inputs
+
+jobs:
+  run-twitter-agent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          pip install google-generativeai requests pillow
+
+      - name: Run Tweet Generation Script
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python generate_tweet.py
+
+      - name: Commit and Push Daily Content to Repo
+        run: |
+          git config --global user.name "MCJP Twitter Agent"
+          git config --global user.email "agent@salarybit.in"
+          git add launchpad/
+          git commit -m "Generated daily content for $(date +'%Y-%m-%d')" || exit 0
+          git push
