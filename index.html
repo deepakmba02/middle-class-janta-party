@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Middle Class Janta Party (MCJP)</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #f59e0b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); padding: 20px; line-height: 1.6; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px 0; }
+        header { text-align: center; margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px solid var(--border-color); }
+        .logo { font-size: 2.5rem; font-weight: 800; color: var(--accent-color); text-transform: uppercase; }
+        .section { margin-bottom: 40px; background: var(--card-bg); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); }
+        h2 { font-size: 1.8rem; color: var(--text-main); margin-bottom: 20px; border-left: 4px solid var(--accent-color); padding-left: 15px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; text-align: left; }
+        th, td { padding: 12px 15px; border-bottom: 1px solid var(--border-color); }
+        th { background-color: #111827; color: var(--accent-color); }
+        .btn-container { text-align: center; margin-top: 20px; }
+        .cta-button { display: inline-block; background-color: var(--accent-color); color: #000; font-weight: 700; text-decoration: none; padding: 15px 35px; border-radius: 8px; }
+        footer { text-align: center; margin-top: 60px; font-size: 0.85rem; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Middle Class Janta Party</div>
+            <p style="color: var(--text-muted); margin-top: 10px;">Salary at the speed of a tortoise. Expenses at the speed of 5G.</p>
+        </header>
+
+        <div class="section">
+            <h2>The Cost-of-Living Ledger</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Expense Category</th>
+                        <th>The Cost Burden</th>
+                        <th>The Satirical Reality</th>
+                    </tr>
+                </thead>
+                <tbody id="ledger-body">
+                    <tr>
+                        <td><strong>Bangalore Rent (1BHK)</strong></td>
+                        <td>₹35,000</td>
+                        <td>Your balcony is officially a 'premium open-air luxury suite.'</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-color);">
+            <h2>The Extortion Registry</h2>
+            <p>Faced an absurd price hike today? Paid too much GST? Submit your bill anonymously. Our background AI Agent network will convert your pain into viral, data-driven financial satire.</p>
+            <div class="btn-container">
+                <a href="#" class="cta-button">File Your Anonymous Rant Now</a>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2026 Middle Class Janta Party (MCJP). Automated AI Satire Archive.</p>
+        </footer>
+    </div>
+</body>
+</html>
